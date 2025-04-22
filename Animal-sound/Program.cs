@@ -1,49 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 
-// interfata IAnimal
 interface IAnimal
 {
     string Nume { get; }
     string Sunet { get; }
 }
- // clasa Animal, ce impleneteaza IAnimal
-class Animal : IAnimal
-{
-    public string Nume { get; init; }
-    public string Sunet { get; init; }
 
-// constructorul cls Animal
-    public Animal(string nume, string sunet)
+abstract class Animal : IAnimal
+{
+    public string Nume => GetType().Name; 
+    public string Sunet { get; }
+
+    protected Animal(string sunet)
     {
-        Nume = nume;
         Sunet = sunet;
     }
 }
 
-//* clase ce mostenesc clasa Animal
 class Broasca : Animal
 {
-    public Broasca() : base("Broasca", "Oac Oac Oac Oaca!") { }
+    public Broasca() : base("Oac Oac Oac Oaca!") { }
 }
 
 class Pisica : Animal
 {
-    public Pisica() : base("Pisica", "Miau Miau Miau!") { }
+    public Pisica() : base("Miau Miau Miau!") { }
 }
 
 class Sarpe : Animal
 {
-    public Sarpe() : base("Sarpe", "SSSSSSSSsssssssssssss!") { }
+    public Sarpe() : base("SSSSSSSSsssssssssssss!") { }
 }
 
-//ToDo: trebuie afisat sunetul fiecarui animal 
-//* afiseaza sunetul animalului
 class SoundDisplay
 {
     public void DisplaySound(IAnimal animal)
     {
-        Console.WriteLine($"{animal.Nume} face sunetul: {animal.Sunet}");
+        Console.WriteLine($"{animal.Nume} face urmatorul sunet: {animal.Sunet}");
     }
 }
 
@@ -60,7 +54,6 @@ class Program
 
         var display = new SoundDisplay();
 
-        // sunetul fiecarui animal
         foreach (var animal in animale)
         {
             display.DisplaySound(animal);
